@@ -1,0 +1,25 @@
+setwd("C:/2024teleril")
+> library(terra)
+terra 1.7.71
+Messaggio di avvertimento:
+il pacchetto ‘terra’ è stato creato con R versione 4.3.3 
+> prova <- rast("L2A_T30STG_20160308T112002_B02_20m.jp2")
+Errore: [rast] file does not exist: L2A_T30STG_20160308T112002_B02_20m.jp2
+In aggiunta: Messaggio di avvertimento:
+L2A_T30STG_20160308T112002_B02_20m.jp2: No such file or directory (GDAL error 4) 
+> prova <- rast("L2A_T30STG_20160308T112002_B02_10m.jp2")
+> plotRGB(prova)
+Errore: [set.RGB] value must have length 3 or 4
+> plot(prova)
+> prova2 <- rast("L2A_T30STG_20160308T112002_TCI_10m.jp2")
+Errore: [rast] file does not exist: L2A_T30STG_20160308T112002_TCI_10m.jp2
+In aggiunta: Messaggio di avvertimento:
+L2A_T30STG_20160308T112002_TCI_10m.jp2: No such file or directory (GDAL error 4) 
+> prova2 <- rast("L2A_T30STG_20160308T112002_TCI_10m.jp2")
+> plotRGB(prova2)
+> donana2024 <- rast("T29SPB_20240306T110921_TCI_10m.jp2")
+> plotRGB(donana2024)
+> landsat2024 <- rast("LC09_L2SP_202034_20240409_20240410_02_T1_SR_B2.TIF")
+> plot(landsat2024)
+> q()
+> 
