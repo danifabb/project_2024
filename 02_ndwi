@@ -30,7 +30,7 @@ plot(stacksent[[1]], col=cl)
 plot(stacksent[[2]], col=cl)
 plot(stacksent[[4]], col=cl)
 im.plotRGB(stacksent, r=4, g=2, b=1)
-dwi <- stacksent[[2]] - stacksent[[4]]
+dwi = stacksent[[2]] - stacksent[[4]]
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 plot(dwi, col=cl)
 ndwi <- dwi/stacksent[[2]] + stacksent[[4]]
@@ -58,10 +58,10 @@ dwi_01 <- stacksent_01[[2]] - stacksent_01[[4]]
 plot(dwi_01, col=viridis) # trying different palettes, cl is the best
 plot(dwi_01, col=plasma(100))
 plot(dwi_01, col=cl)
-ndwi_01 <- dwi_01/stacksent_01[[2]] + stacksent_01[[4]]
+ndwi_01 <- dwi_01/(stacksent_01[[2]] + stacksent_01[[4]])
 plot(ndwi_01, col=viridis)
 plot(ndwi_01, col=plasma(100))
-plot(ndwi_01, col=cl) #controlla se anche in esempio di lezione c'è valore di foresta che diventa più basso/ al contrario di prima
+plot(ndwi_01, col=cl) # perché non va da -1 a 1???
 
 ext <- c(675000, 775000, 4050000, 4150000) # cropping just the park
 ext_2 <- c(700000, 760000, 4070000, 4130000) # this is better
