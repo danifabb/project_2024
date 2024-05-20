@@ -1,0 +1,21 @@
+setwd("C:/orbetello2023_17/")
+b8_2 <- rast("T32TPN_20230717T100559_B08_10m.jp2")
+plot(b8_2)
+rgb_ <- rast("T32TPN_20230717T100559_TCI_10m.jp2")
+library(imageRy)
+im.plotRGB(rgb_, r=1, g=2, b=3)
+im.plotRGB(rgb_, r=2, g=1, b=3)
+rgb
+plot(rgb_)
+b2_ <- rast("T32TPN_20230717T100559_B02_10m.jp2")
+b3_ <- rast("T32TPN_20230717T100559_B03_10m.jp2")
+b4_ <- rast("T32TPN_20230717T100559_B04_10m.jp2")
+stacksent <- c(b2_, b3_, b4_, b8_2)
+cl4 <- colorRampPalette(c("magenta", "cyan4", "cyan", "chartreuse"))(100)
+plot(stacksent, col=cl4)
+plot(stacksent[[4]], col=cl4)
+im.plotRGB(stacksent, r=3, g=2, b=1)
+im.plotRGB(stacksent, r=4, g=2, b=1)
+im.plotRGB(stacksent, r=3, g=2, b=1) #image with forest visible in IR
+
+
