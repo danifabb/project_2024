@@ -43,17 +43,6 @@ ext2 <- c(670000, 685000, 4690000, 4705000)
 cropb4_4 <- crop(cropb4, ext2)
 plot(cropb4_4, col=cl)
 
-setwd("C:/april2023donana/")
-b2_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B2.TIF")
-b3_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B3.TIF")
-b4_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B4.TIF")
-b5_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B5.TIF")
-stacksent_23 <- c(b2_23, b3_23, b4_23, b5_23)
-plot(stacksent_23, col=cl)
-im.plotRGB(stacksent_23, r=3, g=2, b=1)
-im.plotRGB(stacksent_23, r=4, g=2, b=1)
-dwi_23 <- stacksent_23[[2]] - stacksent_23[[4]]
-plot(dwi_23, col=cl)
 
 setwd("C:/april2001donana/")
 b1_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B1.TIF")
@@ -72,7 +61,7 @@ plot(dwi_01, col=cl)
 ndwi_01 <- dwi_01/stacksent_01[[2]] + stacksent_01[[4]]
 plot(ndwi_01, col=viridis)
 plot(ndwi_01, col=plasma(100))
-plot(ndwi_01, col=cl)
+plot(ndwi_01, col=cl) #controlla se anche in esempio di lezione c'è valore di foresta che diventa più basso/ al contrario di prima
 
 ext <- c(675000, 775000, 4050000, 4150000) # cropping just the park
 ext_2 <- c(700000, 760000, 4070000, 4130000) # this is better
@@ -85,6 +74,7 @@ plot(b3_01_cropped, col=cl)
 b4_01_cropped <- crop(b4_01, ext_2)
 plot(b4_01_cropped, col=cl)
 stacksent_01_cropped <- c(b1_01_cropped, b2_01_cropped, b3_01_cropped, b4_01_cropped)
+
 im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_01_cropped, r=4, g=2, b=1)
 dwi_01_cropped <- stacksent_01_cropped[[2]] - stacksent_01_cropped[[4]]
@@ -93,11 +83,37 @@ ndwi_01_cropped <- dwi_01_cropped/stacksent_01_cropped[[2]] + stacksent_01_cropp
 plot(ndwi_01_cropped, col=cl)
 
 setwd("C:/april2023donana/")
-b2_1 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B2.TIF")
-b3_1 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B3.TIF")
-b4_1 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B4.TIF")
-b5_1 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B5.TIF")
-stacksent <- c(b2_1, b3_1, b4_1, b5_1)
-ndwi <- stacksent[[4]] - stacksent[[3]]/ stacksent[[4]] + stacksent[[3]]
+b2_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B2.TIF")
+b3_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B3.TIF")
+b4_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B4.TIF")
+b5_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B5.TIF")
+stacksent_23 <- c(b2_23, b3_23, b4_23, b5_23)
+plot(stacksent_23, col=cl)
+im.plotRGB(stacksent_23, r=3, g=2, b=1)
+im.plotRGB(stacksent_23, r=4, g=2, b=1)
+dwi_23 <- stacksent_23[[2]] - stacksent_23[[4]]
+plot(dwi_23, col=cl)
+ndwi_23 <- dwi_23/ stacksent_23[[4]] + stacksent_23[[3]]
+
+# cropping
+plot(b2_23, col=cl)
+b2_23_cropped <- crop(b2_23, ext_2)
+plot(b2_23_cropped, col=cl)
+b3_23_cropped <- crop(b3_23, ext_2)
+plot(b3_01_cropped, col=cl)
+b4_23_cropped <- crop(b4_23, ext_2)
+plot(b4_23_cropped, col=cl)
+b5_23_cropped <- crop(b5_23, ext_2)
+plot(b5_23_cropped, col=cl)
+stacksent_23_cropped <- c(b2_23_cropped, b3_23_cropped, b4_23_cropped, b5_23_cropped)
+im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
+im.plotRGB(stacksent_23_cropped, r=4, g=2, b=1)
+dwi_23_cropped <- stacksent_23_cropped[[2]] - stacksent_23_cropped[[4]]
+plot(dwi_23_cropped, col=cl)
+ndwi_23_cropped <- dwi_23_cropped/stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]]
+plot(ndwi_23_cropped, col=cl)
+
+
+
 
 
