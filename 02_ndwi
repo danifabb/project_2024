@@ -1,3 +1,7 @@
+library(terra)
+library(imageRy)
+library(viridis)
+
 setwd("C:/orbetello2016/")
 b2 <- rast("T32TPN_20160718T101032_B02_10m.jp2")
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
@@ -60,8 +64,9 @@ b4_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B4.TIF")
 stacksent_01 <- c(b1_01, b2_01, b3_01, b4_01)
 im.plotRGB(stacksent_01, r=3, g=2, b=1)
 im.plotRGB(stacksent_01, r=4, g=2, b=1)
+viridis <- colorRampPalette(viridis(7))(100)
 dwi_01 <- stacksent_01[[2]] - stacksent_01[[4]]
-plot(dwi_2, col=cl)
+plot(dwi_01, col=viridis)
 ndwi <- dwi_2/stacksent[[2]] + stacksent[[4]]
 plot(ndwi, col=cl)
 setwd("C:/april2023donana/")
@@ -71,4 +76,5 @@ b4_1 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B4.TIF")
 b5_1 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B5.TIF")
 stacksent <- c(b2_1, b3_1, b4_1, b5_1)
 ndwi <- stacksent[[4]] - stacksent[[3]]/ stacksent[[4]] + stacksent[[3]]
+
 
