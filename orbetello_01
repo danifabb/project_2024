@@ -18,4 +18,4 @@ im.plotRGB(stacksent, r=3, g=2, b=1)
 im.plotRGB(stacksent, r=4, g=2, b=1)
 im.plotRGB(stacksent, r=3, g=2, b=1) #image with forest visible in IR
 
-
+ext <- c(660000, 700000, 470000, 4740000)
