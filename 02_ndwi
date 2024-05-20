@@ -79,7 +79,7 @@ im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_01_cropped, r=4, g=2, b=1)
 dwi_01_cropped <- stacksent_01_cropped[[2]] - stacksent_01_cropped[[4]]
 plot(dwi_01_cropped, col=cl)
-ndwi_01_cropped <- dwi_01_cropped/stacksent_01_cropped[[2]] + stacksent_01_cropped[[4]]
+ndwi_01_cropped <- dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropped[[4]])
 plot(ndwi_01_cropped, col=cl)
 
 setwd("C:/april2023donana/")
@@ -93,7 +93,7 @@ im.plotRGB(stacksent_23, r=3, g=2, b=1)
 im.plotRGB(stacksent_23, r=4, g=2, b=1)
 dwi_23 <- stacksent_23[[2]] - stacksent_23[[4]] # try doing this right away before cropping, then crop result
 plot(dwi_23, col=cl)
-ndwi_23 <- dwi_23/ stacksent_23[[2]] + stacksent_23[[4]]
+ndwi_23 <- dwi_23/ (stacksent_23[[2]] + stacksent_23[[4]])
 plot(ndwi_23, col=cl)
 
 # cropping
@@ -111,7 +111,7 @@ im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, r=4, g=2, b=1)
 dwi_23_cropped <- stacksent_23_cropped[[2]] - stacksent_23_cropped[[4]]
 plot(dwi_23_cropped, col=cl)
-ndwi_23_cropped <- dwi_23_cropped/stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]]
+ndwi_23_cropped <- dwi_23_cropped/(stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]])
 plot(ndwi_23_cropped, col=cl)
 
 
