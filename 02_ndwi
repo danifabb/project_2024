@@ -91,9 +91,10 @@ stacksent_23 <- c(b2_23, b3_23, b4_23, b5_23)
 plot(stacksent_23, col=cl)
 im.plotRGB(stacksent_23, r=3, g=2, b=1)
 im.plotRGB(stacksent_23, r=4, g=2, b=1)
-dwi_23 <- stacksent_23[[2]] - stacksent_23[[4]]
+dwi_23 <- stacksent_23[[2]] - stacksent_23[[4]] # try doing this right away before cropping, then crop result
 plot(dwi_23, col=cl)
-ndwi_23 <- dwi_23/ stacksent_23[[4]] + stacksent_23[[3]]
+ndwi_23 <- dwi_23/ stacksent_23[[2]] + stacksent_23[[4]]
+plot(ndwi_23, col=cl)
 
 # cropping
 plot(b2_23, col=cl)
