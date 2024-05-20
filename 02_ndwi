@@ -109,7 +109,7 @@ plot(b5_23_cropped, col=cl)
 stacksent_23_cropped <- c(b2_23_cropped, b3_23_cropped, b4_23_cropped, b5_23_cropped)
 im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, r=4, g=2, b=1)
-dwi_23_cropped <- stacksent_23_cropped[[2]] - stacksent_23_cropped[[4]]
+dwi_23_cropped = stacksent_23_cropped[[2]] - stacksent_23_cropped[[4]]
 plot(dwi_23_cropped, col=cl)
 ndwi_23_cropped <- dwi_23_cropped/(stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]])
 plot(ndwi_23_cropped, col=cl)
