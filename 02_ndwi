@@ -1,10 +1,10 @@
 library(terra)
 library(imageRy)
 library(viridis)
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 
 setwd("C:/orbetello2016/")
 b2 <- rast("T32TPN_20160718T101032_B02_10m.jp2")
-cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 ext <- c(660000, 700000, 470000, 4740000)
 cropb2 <- crop(b2, ext)
 plot(cropb2)
