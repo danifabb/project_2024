@@ -129,5 +129,5 @@ ndvi_23_cropped <- crop(ndvi_23, ext_2)
 plot(ndvi_23_cropped, col=cl) # from -0.4391746 to 0.7079000
 
 
-
+# fare dwi_01 - dwi_23? Diff (once I have solved the 1-1 problem)
 
