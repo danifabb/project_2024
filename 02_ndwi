@@ -54,13 +54,13 @@ stacksent_01 <- c(b1_01, b2_01, b3_01, b4_01)
 im.plotRGB(stacksent_01, r=3, g=2, b=1) 
 im.plotRGB(stacksent_01, r=4, g=2, b=1)
 viridis <- colorRampPalette(viridis(7))(100)
-dwi_01 <- stacksent_01[[2]] - stacksent_01[[4]]
+dwi_01 = stacksent_01[[2]] - stacksent_01[[4]] # from -21335 to 42872; green - NIR (water reflects green and absorbs NIR)
 plot(dwi_01, col=viridis) # trying different palettes, cl is the best
 plot(dwi_01, col=plasma(100))
 plot(dwi_01, col=cl)
-ndwi_01 <- dwi_01/(stacksent_01[[2]] + stacksent_01[[4]])
+ndwi_01 = dwi_01/(stacksent_01[[2]] + stacksent_01[[4]])
 plot(ndwi_01, col=viridis)
-plot(ndwi_01, col=plasma(100))
+plot(ndwi_01, col=plasma(100)) # from -0.5384227 to 0.4860881; water is reflected at a higher value than land
 plot(ndwi_01, col=cl) # perché non va da -1 a 1???
 
 ext <- c(675000, 775000, 4050000, 4150000) # cropping just the park
@@ -77,10 +77,17 @@ stacksent_01_cropped <- c(b1_01_cropped, b2_01_cropped, b3_01_cropped, b4_01_cro
 
 im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_01_cropped, r=4, g=2, b=1)
-dwi_01_cropped <- stacksent_01_cropped[[2]] - stacksent_01_cropped[[4]]
+dwi_01_cropped = stacksent_01_cropped[[2]] - stacksent_01_cropped[[4]]
 plot(dwi_01_cropped, col=cl)
-ndwi_01_cropped <- dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropped[[4]])
+ndwi_01_cropped = dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropped[[4]])
 plot(ndwi_01_cropped, col=cl)
+
+dvi_01 = stacksent_01[[4]] - stacksent_01[[3]]
+dvi_01_cropped <- crop(dvi_01, ext_2)
+plot(dvi_01_cropped, col=cl)
+ndvi_01 = dvi_01/(stacksent_01[[4]] + stacksent_01[[3]])
+ndvi_01_cropped <- crop(ndvi_01, ext_2)
+plot(ndvi_01_cropped, col=cl) # from -0.4820887 to 0.5537370 
 
 setwd("C:/april2023donana/")
 b2_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B2.TIF")
@@ -91,10 +98,10 @@ stacksent_23 <- c(b2_23, b3_23, b4_23, b5_23)
 plot(stacksent_23, col=cl)
 im.plotRGB(stacksent_23, r=3, g=2, b=1)
 im.plotRGB(stacksent_23, r=4, g=2, b=1)
-dwi_23 <- stacksent_23[[2]] - stacksent_23[[4]] # try doing this right away before cropping, then crop result
+dwi_23 = stacksent_23[[2]] - stacksent_23[[4]] # from -28102 to 16318 # (do this right away before cropping, then crop result, it is easier)
 plot(dwi_23, col=cl)
-ndwi_23 <- dwi_23/ (stacksent_23[[2]] + stacksent_23[[4]])
-plot(ndwi_23, col=cl)
+ndwi_23 = dwi_23/ (stacksent_23[[2]] + stacksent_23[[4]])
+plot(ndwi_23, col=cl) # from -0.6480127 to 0.4149629 
 
 # cropping
 plot(b2_23, col=cl)
@@ -111,9 +118,15 @@ im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, r=4, g=2, b=1)
 dwi_23_cropped = stacksent_23_cropped[[2]] - stacksent_23_cropped[[4]]
 plot(dwi_23_cropped, col=cl)
-ndwi_23_cropped <- dwi_23_cropped/(stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]])
+ndwi_23_cropped = dwi_23_cropped/(stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]])
 plot(ndwi_23_cropped, col=cl)
 
+dvi_23 = stacksent_23[[4]] - stacksent_23[[3]]
+dvi_23_cropped <- crop(dvi_23, ext_2)
+plot(dvi_23_cropped, col=cl)
+ndvi_23 = dvi_23/(stacksent_23[[4]] + stacksent_23[[3]])
+ndvi_23_cropped <- crop(ndvi_23, ext_2)
+plot(ndvi_23_cropped, col=cl) # from -0.4391746 to 0.7079000
 
 
 
