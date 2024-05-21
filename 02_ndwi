@@ -130,4 +130,5 @@ plot(ndvi_23_cropped, col=cl) # from -0.4391746 to 0.7079000
 
 
 # fare dwi_01 - dwi_23? Diff (once I have solved the 1-1 problem)
-
+dif_time <- stacksent_01_cropped[[4]] - stacksent_23_cropped[[4]]
+plot(dif_time, col=cl)
