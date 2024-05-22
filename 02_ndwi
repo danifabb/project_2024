@@ -136,7 +136,31 @@ ndvi_23_cropped <- crop(ndvi_23, ext_2)
 plot(ndvi_23, col=cl)
 plot(ndvi_23_cropped, col=cl) # from -0.4391746 to 0.7079000
 
-
+# time series analysis
 # fare dwi_01 - dwi_23? Diff (once I have solved the 1-1 problem)
-dif_time <- stacksent_01_cropped[[4]] - stacksent_23_cropped[[4]]
-plot(dif_time, col=cl)
+
+# time difference with NIR band
+dif_nir <- stacksent_01_cropped[[4]] - stacksent_23_cropped[[4]] # red parts highlight loss of vegetation, however there's also other places where it actually grew (blue)
+plot(dif_nir, col=clg)
+
+par(mfrow=c(1,3))
+plot(b4_01_cropped, col=cl)
+plot(b5_23_cropped, col=cl)
+plot(dif_nir, col=cl)
+
+par(mfrow=c(1,3))
+plot(b4_01_cropped, col=clg)
+plot(b5_23_cropped, col=clg)
+plot(dif_time, col=clg)
+
+# classification is apparently ok with one band only (that actually makes sense)
+b4_01_croppedc <- im.classify(b4_01_cropped, num_clusters=3)
+
+ esporta jpeg di immagini cropped con nit come prima banda e usale in analisi  ulteriori
+
+
+
+
+
+
+
