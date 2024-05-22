@@ -83,11 +83,15 @@ ndwi_01_cropped = dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropp
 plot(ndwi_01_cropped, col=cl)
 
 dvi_01 = stacksent_01[[4]] - stacksent_01[[3]]
+dvi_01 = b4_01 - b2_01
 dvi_01_cropped <- crop(dvi_01, ext_2)
 plot(dvi_01_cropped, col=cl)
+plot(dvi_01, col=cl)
 ndvi_01 = dvi_01/(stacksent_01[[4]] + stacksent_01[[3]])
+ndvi_01 = dvi_01/(b4_01 + b2_01)
 ndvi_01_cropped <- crop(ndvi_01, ext_2)
 plot(ndvi_01_cropped, col=cl) # from -0.4820887 to 0.5537370 
+plot(ndvi_01, col=cl)
 
 setwd("C:/april2023donana/")
 b2_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B2.TIF")
@@ -99,8 +103,10 @@ plot(stacksent_23, col=cl)
 im.plotRGB(stacksent_23, r=3, g=2, b=1)
 im.plotRGB(stacksent_23, r=4, g=2, b=1)
 dwi_23 = stacksent_23[[2]] - stacksent_23[[4]] # from -28102 to 16318 # (do this right away before cropping, then crop result, it is easier)
+dwi_23 = b3_23 - b5_23
 plot(dwi_23, col=cl)
 ndwi_23 = dwi_23/ (stacksent_23[[2]] + stacksent_23[[4]])
+ndwi_23 = dwi_23/(b3_23 + b5_23)
 plot(ndwi_23, col=cl) # from -0.6480127 to 0.4149629 
 
 # cropping
@@ -123,9 +129,11 @@ plot(ndwi_23_cropped, col=cl)
 
 dvi_23 = stacksent_23[[4]] - stacksent_23[[3]]
 dvi_23_cropped <- crop(dvi_23, ext_2)
+plot(dvi_23, col=cl)
 plot(dvi_23_cropped, col=cl)
 ndvi_23 = dvi_23/(stacksent_23[[4]] + stacksent_23[[3]])
 ndvi_23_cropped <- crop(ndvi_23, ext_2)
+plot(ndvi_23, col=cl)
 plot(ndvi_23_cropped, col=cl) # from -0.4391746 to 0.7079000
 
 
