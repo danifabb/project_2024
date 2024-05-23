@@ -54,15 +54,16 @@ b4_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B4.TIF")
 stacksent_01 <- c(b1_01, b2_01, b3_01, b4_01)
 im.plotRGB(stacksent_01, r=3, g=2, b=1) 
 im.plotRGB(stacksent_01, r=4, g=2, b=1)
-viridis <- colorRampPalette(viridis(7))(100)
+#viridis <- colorRampPalette(viridis(7))(100)
 dwi_01 = stacksent_01[[2]] - stacksent_01[[4]] # from -21335 to 42872; green - NIR (water reflects green and absorbs NIR)
-plot(dwi_01, col=viridis) # trying different palettes, cl is the best
-plot(dwi_01, col=plasma(100))
+#plot(dwi_01, col=viridis) # trying different palettes, cl is the best
+#plot(dwi_01, col=plasma(100))
 plot(dwi_01, col=cl)
 ndwi_01 = dwi_01/(stacksent_01[[2]] + stacksent_01[[4]])
-plot(ndwi_01, col=viridis)
-plot(ndwi_01, col=plasma(100)) # from -0.5384227 to 0.4860881; water is reflected at a higher value than land
-plot(ndwi_01, col=cl) # perché non va da -1 a 1???
+#plot(ndwi_01, col=viridis)
+#plot(ndwi_01, col=plasma(100)) 
+plot(ndwi_01, col=cl) # from -0.5384227 to 0.4860881; water is reflected at a higher value than land 
+# perché non va da -1 a 1???
 
 ext <- c(675000, 775000, 4050000, 4150000) # cropping just the park
 ext_2 <- c(700000, 760000, 4070000, 4130000) # this is better
@@ -78,24 +79,23 @@ ext_2 <- c(700000, 760000, 4070000, 4130000) # this is better
 
 # easier way: just crop stacksent_01, not every band
 stacksent_01_cropped <- crop(stacksent_01, ext_2)
-im.plotRGB(stacksent_01_cropped, 4, 3, 2)
+
+# ndwi
+im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1)
+im.plotRGB(stacksent_01_cropped, r=4, g=3, b=2)
+dwi_01_cropped = stacksent_01_cropped[[2]] - stacksent_01_cropped[[4]]
+plot(dwi_01_cropped, col=cl)
+ndwi_01_cropped = dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropped[[4]])
+plot(ndwi_01_cropped, col=cl)
 
 # saving image as jpeg with band 1 as nir
 jpeg("nir_01.jpg")
 im.plotRGB(stacksent_01_cropped, 4, 3, 2)
 dev.off()
 nir_01 <- rast("nir_01.jpg")
-plot(nir_01)
 im.plotRGB(nir_01, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
 dwi_01 = nir_01[[3]] - nir_01[[1]]
 ndwi_01 = dwi_01/(nir_01[[3]] + nir_01[[1]]) 
-
-im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1)
-im.plotRGB(stacksent_01_cropped, r=4, g=2, b=1)
-dwi_01_cropped = stacksent_01_cropped[[2]] - stacksent_01_cropped[[4]]
-plot(dwi_01_cropped, col=cl)
-ndwi_01_cropped = dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropped[[4]])
-plot(ndwi_01_cropped, col=cl)
 
 # ndvi (vegetation)
 dvi_01 = stacksent_01[[4]] - stacksent_01[[3]]
@@ -126,26 +126,34 @@ ndwi_23 = dwi_23/(b3_23 + b5_23)
 plot(ndwi_23, col=cl) # from -0.6480127 to 0.4149629 
 
 # cropping
-plot(b2_23, col=cl)
-b2_23_cropped <- crop(b2_23, ext_2)
-plot(b2_23_cropped, col=cl)
-b3_23_cropped <- crop(b3_23, ext_2)
-plot(b3_01_cropped, col=cl)
-b4_23_cropped <- crop(b4_23, ext_2)
-plot(b4_23_cropped, col=cl)
-b5_23_cropped <- crop(b5_23, ext_2)
-plot(b5_23_cropped, col=cl)
-stacksent_23_cropped <- c(b2_23_cropped, b3_23_cropped, b4_23_cropped, b5_23_cropped)
+#plot(b2_23, col=cl)
+#b2_23_cropped <- crop(b2_23, ext_2)
+#plot(b2_23_cropped, col=cl)
+#b3_23_cropped <- crop(b3_23, ext_2)
+#plot(b3_01_cropped, col=cl)
+#b4_23_cropped <- crop(b4_23, ext_2)
+#plot(b4_23_cropped, col=cl)
+#b5_23_cropped <- crop(b5_23, ext_2)
+#plot(b5_23_cropped, col=cl)
+#stacksent_23_cropped <- c(b2_23_cropped, b3_23_cropped, b4_23_cropped, b5_23_cropped)
+
+# easier way: just crop stacksent_23, not every band
+stacksent_23_cropped <- crop(stacksent_23, ext_2)
 im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
-im.plotRGB(stacksent_23_cropped, r=4, g=2, b=1)
+im.plotRGB(stacksent_23_cropped, 4, 3, 2)
+
 dwi_23_cropped = stacksent_23_cropped[[2]] - stacksent_23_cropped[[4]]
 plot(dwi_23_cropped, col=cl)
 ndwi_23_cropped = dwi_23_cropped/(stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]])
 plot(ndwi_23_cropped, col=cl)
 
-# easier way: just crop stacksent_01, not every band
-stacksent_01_cropped <- crop(stacksent_01, ext_2)
-im.plotRGB(stacksent_01_cropped, 4, 3, 2)
+jpeg("nir_23.jpg")
+im.plotRGB(stacksent_23_cropped, 4, 3, 2)
+dev.off()
+nir_23 <- rast("nir_23.jpg")
+im.plotRGB(nir_23, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
+dwi_23 = nir_23[[3]] - nir_23[[1]]
+ndwi_23 = dwi_23/(nir_23[[3]] + nir_23[[1]])
 
 #ndvi (vegetation)
 dvi_23 = stacksent_23[[4]] - stacksent_23[[3]]
