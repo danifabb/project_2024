@@ -176,8 +176,10 @@ plot(dif_nir, col=clg)
 
 # classification is apparently ok with one band only (that actually makes sense)
 b4_01_croppedc <- im.classify(b4_01_cropped, num_clusters=3)
+nir_01c <- im.classify(nir_01, num_clusters=4) # decent
 
-# esporta jpeg di immagini cropped con nit come prima banda e usale in analisi  ulteriori
+
+# esporta jpeg di immagini cropped con nir come prima banda e usale in analisi  ulteriori
 
 
 
