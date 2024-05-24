@@ -254,7 +254,25 @@ perc01 = prop01 *100
 perc23 = prop23 *100
 perc23
    
+class <- c("land", "water") 
+y1992 <- c(67, 33)
+y2006 <- c(74, 26)
 
+tabout <- data.frame(class, y01, y23)
+View(tabout)
+
+# ggplot2 graphs
+# histogram 
+p1 <- ggplot(tabout, aes(x=class, y=y01, color=class)) + geom_bar(stat="identity", fill="white")
+p2 <- ggplot(tabout, aes(x=class, y=y23, color=class)) + geom_bar(stat="identity", fill="white")
+
+#let's put the two graphs together with patchwork
+p1 + p2
+
+# correcting for axis range
+p1 <- ggplot(tabout, aes(x=class, y=y01, color=class)) + geom_bar(stat="identity", fill="white") +  ylim(c(0, 100))
+p2 <- ggplot(tabout, aes(x=class, y=y23, color=class)) + geom_bar(stat="identity", fill="white") +  ylim(c(0, 100))
+p1 + p2
 
 
 
