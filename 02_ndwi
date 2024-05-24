@@ -147,7 +147,7 @@ plot(dwi_23_cropped, col=cl)
 ndwi_23_cropped = dwi_23_cropped/(stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]])
 plot(ndwi_23_cropped, col=cl)
 
-jpeg("nir_23.jpg")
+jpeg("nir_23.jpg", width = 2000, height = 2000, res = 300)
 im.plotRGB(stacksent_23_cropped, 4, 3, 2)
 dev.off()
 nir_23 <- rast("nir_23.jpg")
