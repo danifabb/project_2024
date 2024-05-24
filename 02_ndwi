@@ -183,12 +183,24 @@ plot(b5_23_cropped, col=clg)
 plot(dif_nir, col=clg)
 
 # classification is apparently ok with one band only (that actually makes sense)
+par(mfrow=c(1,2))
 b4_01_croppedc <- im.classify(b4_01_cropped, num_clusters=3)
-nir_01c <- im.classify(nir_01, num_clusters=4) # decent
+b5_23_croppedc <- im.classify(b5_01_cropped, num_clusters=3)
 
+nir_01c <- im.classify(nir_01, num_clusters=4) # decent
+nir_23c <- im.classify(nir_23, num_clusters=4) # bad
 
 # esporta jpeg di immagini cropped con nir come prima banda e usale in analisi  ulteriori
 
+par(mfrow=c(1,2))
+ndwi_23_croppedc <- im.classify(ndwi_23_cropped, num_clusters=3)
+ndwi_01_croppedc <- im.classify(ndwi_01_cropped, num_clusters=3)
+
+par(mfrow=c(2,2))
+plot(b4_01_cropped, col=cl)
+plot(b5_23_cropped, col=cl)
+b4_01_croppedc <- im.classify(b4_01_cropped, num_clusters=3)
+b5_23_croppedc <- im.classify(b5_23_cropped, num_clusters=3)
 
 
 
