@@ -89,7 +89,7 @@ ndwi_01_cropped = dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropp
 plot(ndwi_01_cropped, col=cl)
 
 # saving image as jpeg with band 1 as nir
-jpeg("nir_01.jpg")
+jpeg("nir_01.jpg", width = 2000, height = 2000, res = 300)
 im.plotRGB(stacksent_01_cropped, 4, 3, 2)
 dev.off()
 nir_01 <- rast("nir_01.jpg")
