@@ -1,3 +1,4 @@
+# qui ci ho messo solo ext_3, viene tagliato più mare 
 setwd("C:/donana/")
 # 2001
 b1_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B1.TIF")
