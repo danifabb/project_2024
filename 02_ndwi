@@ -96,10 +96,12 @@ nir_01 <- rast("nir_01.jpg")
 im.plotRGB(nir_01, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
 dwi_01 = nir_01[[3]] - nir_01[[1]]
 ndwi_01 = dwi_01/(nir_01[[3]] + nir_01[[1]]) 
+plot(ndwi_01, col=cl)
 
 dvi_01 = nir_01[[1]] - nir_01[[2]]
 plot(dvi_01, col=cl)
 ndvi_01 = dvi_01/ (nir_01[[1]] + nir_01[[2]])
+plot(ndvi_01, col=cl)
 
 # ndvi (vegetation)
 dvi_01 = stacksent_01[[4]] - stacksent_01[[3]]
@@ -158,6 +160,7 @@ nir_23 <- rast("nir_23.jpg")
 im.plotRGB(nir_23, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
 dwi_23 = nir_23[[3]] - nir_23[[1]]
 ndwi_23 = dwi_23/(nir_23[[3]] + nir_23[[1]])
+plot(ndwi_23, col=cl)
 
 dvi_23 = nir_23[[1]] - nir_23[[2]]
 plot(dvi_23, col=cl)
@@ -173,6 +176,18 @@ ndvi_23 = dvi_23/(stacksent_23[[4]] + stacksent_23[[3]])
 ndvi_23_cropped <- crop(ndvi_23, ext_2)
 plot(ndvi_23, col=cl)
 plot(ndvi_23_cropped, col=cl) # from -0.4391746 to 0.7079000
+
+par(mfrow=c(2,2))
+im.plotRGB(nir_01, 1, 2, 3)
+im.plotRGB(nir_23, 1, 2, 3)
+plot(ndwi_01, col=cl)
+plot(ndwi_23, col=cl)
+
+par(mfrow=c(2,2))
+im.plotRGB(nir_01, 1, 2, 3)
+im.plotRGB(nir_23, 1, 2, 3)
+plot(ndvi_01, col=cl)
+plot(ndvi_23, col=cl)
 
 # time series analysis
 # fare dwi_01 - dwi_23? Diff (once I have solved the 1-1 problem)
