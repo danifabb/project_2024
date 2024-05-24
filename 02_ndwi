@@ -97,6 +97,10 @@ im.plotRGB(nir_01, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
 dwi_01 = nir_01[[3]] - nir_01[[1]]
 ndwi_01 = dwi_01/(nir_01[[3]] + nir_01[[1]]) 
 
+dvi_01 = nir_01[[1]] - nir_01[[2]]
+plot(dvi_01, col=cl)
+ndvi_01 = dvi_01/ (nir_01[[1]] + nir_01[[2]])
+
 # ndvi (vegetation)
 dvi_01 = stacksent_01[[4]] - stacksent_01[[3]]
 dvi_01 = b4_01 - b2_01
@@ -154,6 +158,11 @@ nir_23 <- rast("nir_23.jpg")
 im.plotRGB(nir_23, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
 dwi_23 = nir_23[[3]] - nir_23[[1]]
 ndwi_23 = dwi_23/(nir_23[[3]] + nir_23[[1]])
+
+dvi_23 = nir_23[[1]] - nir_23[[2]]
+plot(dvi_23, col=cl)
+ndvi_23 = dvi_23/(nir_23[[1]] + nir_23[[2]])
+plot(ndvi_23, col=cl)
 
 #ndvi (vegetation)
 dvi_23 = stacksent_23[[4]] - stacksent_23[[3]]
