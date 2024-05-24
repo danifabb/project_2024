@@ -175,3 +175,17 @@ p1 + p2
 p1 <- ggplot(tabout, aes(x=class, y=y01, color=class)) + geom_bar(stat="identity", fill="white") +  ylim(c(0, 100))
 p2 <- ggplot(tabout, aes(x=class, y=y23, color=class)) + geom_bar(stat="identity", fill="white") +  ylim(c(0, 100))
 p1 + p2
+
+# variability1
+viridisc <- colorRampPalette(viridis(7))(100)
+mio <- nir_01[[1]]
+plot(mio, col=cl)
+sdmio <- focal(mio, matrix(1/9, 3, 3), fun=sd) 
+plot(sdmio, col=viridisc)
+
+sdmio7 <- focal(mio, matrix(1/49, 7, 7), fun=sd) 
+plot(sdmio7, col=viridisc)
+
+sdmio13 <- focal(mio, matrix(1/169, 13, 13), fun=sd) 
+plot(sdmio13, col=viridisc) # profilo del lago si vede bene così
+
