@@ -58,7 +58,7 @@ b3_23_cropped <- crop(b3_23, ext_2)
 #plot(b3_01_cropped, col=cl)
 #b4_23_cropped <- crop(b4_23, ext_2)
 #plot(b4_23_cropped, col=cl)
-b5_23_cropped <- crop(b5_23, ext_2)
+b5_23_cropped <- crop(b5_23, ext_3)
 plot(b5_23_cropped, col=cl)
 #stacksent_23_cropped <- c(b2_23_cropped, b3_23_cropped, b4_23_cropped, b5_23_cropped)
 
