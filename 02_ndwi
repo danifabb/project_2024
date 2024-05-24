@@ -67,6 +67,7 @@ plot(ndwi_01, col=cl) # from -0.5384227 to 0.4860881; water is reflected at a hi
 
 ext <- c(675000, 775000, 4050000, 4150000) # cropping just the park
 ext_2 <- c(700000, 760000, 4070000, 4130000) # this is better
+ext_3 <- c(720000, 760000, 4070000, 4130000)
 #b1_01_cropped <- crop(b1_01, ext_2)
 #plot(b1_01_cropped, col=cl)
 b2_01_cropped <- crop(b2_01, ext_2)
@@ -79,6 +80,7 @@ b4_01_cropped <- crop(b4_01, ext_2)
 
 # easier way: just crop stacksent_01, not every band
 stacksent_01_cropped <- crop(stacksent_01, ext_2)
+stacksent_01_cropped <- crop(stacksent_01, ext_3)
 
 # ndwi
 im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1)
@@ -132,6 +134,8 @@ ndwi_23 = dwi_23/(b3_23 + b5_23)
 plot(ndwi_23, col=cl) # from -0.6480127 to 0.4149629 
 
 # cropping
+ext_2 <- c(700000, 760000, 4070000, 4130000)
+ext_3 <- c(720000, 760000, 4070000, 4130000)
 #plot(b2_23, col=cl)
 #b2_23_cropped <- crop(b2_23, ext_2)
 #plot(b2_23_cropped, col=cl)
@@ -145,6 +149,7 @@ b5_23_cropped <- crop(b5_23, ext_2)
 
 # easier way: just crop stacksent_23, not every band
 stacksent_23_cropped <- crop(stacksent_23, ext_2)
+stacksent_23_cropped <- crop(stacksent_23, ext_3)
 im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, 4, 3, 2)
 
