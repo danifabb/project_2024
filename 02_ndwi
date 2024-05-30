@@ -14,7 +14,8 @@ library(imageRy)
 library(viridis)
 setwd("C:/donana/")
 
-# after downloading the images, I imported four 2001 bands: B1 (blue), B2 (green), B3 (red) and B5 (NIR). 
+# The image from 2001 were on the 10th April.
+# after downloading them, I imported four bands: B1 (blue), B2 (green), B3 (red) and B4 (NIR). 
 b1_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B1.TIF")
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 b2_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B2.TIF")
