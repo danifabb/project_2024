@@ -1,57 +1,30 @@
+# Author: Daniela Fabbri
+
+# Doñana National Park is a Ramsar site in Andalucia, in the South of Spain. It is an important wetland area, with marshes and sand dunes. 
+# The river Guadalquivir flows along the eastern border of the park.  
+# Earth Observatory reports that the area has been experiencing drought for a decade, causing the marshes to dry up,
+# with the years 2021-2023 being the worst (article: https://earthobservatory.nasa.gov/images/152722/rain-revives-donana-national-park).
+# This work aims at showing the effect of drought, both on the marshes and on the vegetation of the park,
+# by comparing satellite images from the same month (April) in 2001 and 2023. The 2023 image was taken from Landsat 8-9,
+# while the 2001 image was taken from Landsat 4-5. 
+
+# libraries and setting of working directory
 library(terra)
 library(imageRy)
 library(viridis)
-cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
-
-setwd("C:/orbetello2016/")
-b2 <- rast("T32TPN_20160718T101032_B02_10m.jp2")
-ext <- c(660000, 700000, 470000, 4740000)
-cropb2 <- crop(b2, ext)
-plot(cropb2)
-plot(cropb2, col=cl)
-plot(b2, col=cl)
-ext <- c(470000, 4720000, 670000, 690000)
-ext <- c(670000, 690000, 470000, 4720000)
-cropb2 <- crop(b2, ext)
-plot(cropb2)
-plot(b2, col=cl)
-plot(cropb2)
-plot(cropb2, col=cl)
-b3 <- rast("T32TPN_20160718T101032_B03_10m.jp2")
-cropb3 <- crop(b3, ext)
-plot(b3, col=cl)
-plot(cropb3, col=cl)
-b4 <- rast("T32TPN_20160718T101032_B04_10m.jp2")
-cropb4 <- crop(b4, ext)
-b8 <- rast("T32TPN_20160718T101032_B08_10m.jp2")
-cropb8 <- crop(b8, ext)
-stacksent <- c(cropb2, cropb3, cropb4, cropb8)
-plot(stacksent[[1]], col=cl)
-plot(stacksent[[2]], col=cl)
-plot(stacksent[[4]], col=cl)
-im.plotRGB(stacksent, r=4, g=2, b=1)
-dwi = stacksent[[2]] - stacksent[[4]]
-cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
-plot(dwi, col=cl)
-ndwi <- dwi/stacksent[[2]] + stacksent[[4]]
-plot(ndwi, col=cl)
-im.plotRGB(stacksent, r=3, g=2, b=1)
-plot(ndwi, col=cl)
-plot(dwi, col=cl)
-dvi <- stacksent[[4]] - stacksent[[3]]
-ext2 <- c(670000, 685000, 4690000, 4705000)
-cropb4_4 <- crop(cropb4, ext2)
-plot(cropb4_4, col=cl)
-
-
 setwd("C:/donana/")
-# 2001
+
+# after downloading the images, I imported four 2001 bands: B1 (blue), B2 (green), B3 (red) and B5 (NIR). 
 b1_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B1.TIF")
-plot(b1_01, col=cl)
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 b2_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B2.TIF")
 b3_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B3.TIF")
 b4_01 <- rast("LE07_L2SP_202034_20010410_20200917_02_T1_SR_B4.TIF")
+
+# building an image with multiple layers/ bands
 stacksent_01 <- c(b1_01, b2_01, b3_01, b4_01)
+
+# plotting of image with natural colors 
 im.plotRGB(stacksent_01, r=3, g=2, b=1) 
 im.plotRGB(stacksent_01, r=4, g=2, b=1)
 #viridis <- colorRampPalette(viridis(7))(100)
