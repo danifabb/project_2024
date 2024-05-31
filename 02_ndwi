@@ -208,6 +208,7 @@ tot <- sum(4383.0670, 2597.6502, 507.7512, 244.5125) # 57% PC1
 pcimage_01 <- im.pca(nir_01)
 pcimage_23 <- im.pca(nir_23)
 
+# controlla pca ai 3 livelli per tutti e due + riguarda come era la variabilità con una sola banda
 
 
 
