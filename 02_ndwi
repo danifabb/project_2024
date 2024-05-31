@@ -1,6 +1,6 @@
 # Author: Daniela Fabbri
 
-# Doñana National Park is a Ramsar site in Andalucia, in the South of Spain. It is an important wetland area, with marshes and sand dunes. 
+# Doñana National Park is a Ramsar site in Andalucia, in southern Spain. It is an important wetland area, with marshes and sand dunes. 
 # The river Guadalquivir flows along the eastern border of the park.  
 # Earth Observatory reports that the area has been experiencing drought for a decade, causing the marshes to dry up,
 # with the years 2021-2023 being the worst (article: https://earthobservatory.nasa.gov/images/152722/rain-revives-donana-national-park).
@@ -26,11 +26,11 @@ stacksent_01 <- c(b1_01, b2_01, b3_01, b4_01)
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 plot(stacksent_01, col=cl) 
 
-# plotting an image with natural colors (RGB): B3 is red, therefore it is put in first place here, etc. 
+# plotting an image with natural colors (RGB): B3 is red, therefore I put it in first place here, etc. 
 im.plotRGB(stacksent_01, r=3, g=2, b=1) 
 im.plotRGB(stacksent_01, r=4, g=3, b=2) # when NIR is put on the red band, the vegetation appears red and the water black
 
-### doing the same process with the IMAGES FROM 23rd APRIL 2023. B2 = blue, B3 = green, B4 = red, B5= NIR.
+### doing the same process with the IMAGES FROM 23rd APRIL 2023. Bands: B2 = blue, B3 = green, B4 = red, B5= NIR.
 b2_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B2.TIF")
 b3_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B3.TIF")
 b4_23 <- rast("LC09_L2SP_202034_20230423_20230425_02_T1_SR_B4.TIF")
@@ -42,7 +42,7 @@ im.plotRGB(stacksent_23, r=3, g=2, b=1)
 ### before using the images to do further analysis, it is necessary to CUT them, as they include a much bigger area than the park.
 # cropping the 2001 image
 ext_2 <- c(700000, 760000, 4070000, 4130000) 
-ext_3 <- c(720000, 760000, 4070000, 4130000) # the image can be cut by using the coordinates on the edges
+ext_3 <- c(720000, 760000, 4070000, 4130000) # the image can be cut by using the numbers (?) on the edges
 stacksent_01_cropped <- crop(stacksent_01, ext_2)
 stacksent_01_cropped <- crop(stacksent_01, ext_3) 
 im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1) # now I have selected roughly the area of the park
@@ -54,95 +54,71 @@ stacksent_23_cropped <- crop(stacksent_23, ext_3)
 im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, 4, 3, 2)
 
-# This analysis can be divided in ... parts:
+# the cropped images are then saved as jpeg with:
+# band 1 = NIR
+# band 2 = red
+# band 3 = green
+
+jpeg("nir_01.jpg", width = 2000, height = 2000, res = 300)
+im.plotRGB(stacksent_01_cropped, 4, 3, 2)
+dev.off()
+
+jpeg("nir_23.jpg", width = 2000, height = 2000, res = 300)
+im.plotRGB(stacksent_23_cropped, 4, 3, 2)
+dev.off()
+
+# replotting images with band 1 = NIR, band 2 = red, band 3 = green
+nir_01 <- rast("nir_01.jpg") # importing new .jpg image
+im.plotRGB(nir_01, 1, 2, 3)
+
+nir_23 <- rast("nir_23.jpg")
+im.plotRGB(nir_23, 1, 2, 3)
+
+
+### This analysis can be divided in ... parts:
 # 1. Spectral indices: calculation of NDWI and NDVI
 # Times series analysis?
 # 2. Classification: water and land cover changes over the years
 # 3. 
 
-# 1. Spectral indices 
+# 1. SPECTRAL INDICES
+# DWI = Difference Water Index; it is used for water bodies detection. 
+# the NIR band (water absorbs light at this wavelength) is subtracted from the green band (water reflects light at this λ)
 
-# ndwi
-im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1)
-im.plotRGB(stacksent_01_cropped, r=4, g=3, b=2)
-dwi_01_cropped = stacksent_01_cropped[[2]] - stacksent_01_cropped[[4]]
-plot(dwi_01_cropped, col=cl)
-ndwi_01_cropped = dwi_01_cropped/(stacksent_01_cropped[[2]] + stacksent_01_cropped[[4]])
-plot(ndwi_01_cropped, col=cl)
-
-# saving image as jpeg with band 1 as nir
-jpeg("nir_01.jpg", width = 2000, height = 2000, res = 300)
-im.plotRGB(stacksent_01_cropped, 4, 3, 2)
-dev.off()
-nir_01 <- rast("nir_01.jpg")
-im.plotRGB(nir_01, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
+# DWI for 2001
 dwi_01 = nir_01[[3]] - nir_01[[1]]
+# the index needs to be normalized so that the values from 2001 and 2023 can be compared:
 ndwi_01 = dwi_01/(nir_01[[3]] + nir_01[[1]]) 
-plot(ndwi_01, col=cl)
+plot(ndwi_01, col=cl) # index ranges from -1 to 1
 
-dvi_01 = nir_01[[1]] - nir_01[[2]]
-plot(dvi_01, col=cl)
-ndvi_01 = dvi_01/ (nir_01[[1]] + nir_01[[2]])
-plot(ndvi_01, col=cl)
-
-# ndvi (vegetation)
-dvi_01 = stacksent_01[[4]] - stacksent_01[[3]]
-dvi_01 = b4_01 - b2_01
-dvi_01_cropped <- crop(dvi_01, ext_2)
-plot(dvi_01_cropped, col=cl)
-plot(dvi_01, col=cl)
-ndvi_01 = dvi_01/(stacksent_01[[4]] + stacksent_01[[3]])
-ndvi_01 = dvi_01/(b4_01 + b2_01)
-ndvi_01_cropped <- crop(ndvi_01, ext_2)
-plot(ndvi_01_cropped, col=cl) # from -0.4820887 to 0.5537370 
-plot(ndvi_01, col=cl)
-
-
-im.plotRGB(stacksent_23, r=4, g=2, b=1)
-dwi_23 = stacksent_23[[2]] - stacksent_23[[4]] # from -28102 to 16318 # (do this right away before cropping, then crop result, it is easier)
-dwi_23 = b3_23 - b5_23
-plot(dwi_23, col=cl)
-ndwi_23 = dwi_23/ (stacksent_23[[2]] + stacksent_23[[4]])
-ndwi_23 = dwi_23/(b3_23 + b5_23)
-plot(ndwi_23, col=cl) # from -0.6480127 to 0.4149629 
-
-
-
-dwi_23_cropped = stacksent_23_cropped[[2]] - stacksent_23_cropped[[4]]
-plot(dwi_23_cropped, col=cl)
-ndwi_23_cropped = dwi_23_cropped/(stacksent_23_cropped[[2]] + stacksent_23_cropped[[4]])
-plot(ndwi_23_cropped, col=cl)
-
-jpeg("nir_23.jpg", width = 2000, height = 2000, res = 300)
-im.plotRGB(stacksent_23_cropped, 4, 3, 2)
-dev.off()
-nir_23 <- rast("nir_23.jpg")
-im.plotRGB(nir_23, 1, 2, 3) # band 1 = NIR, band 2 = red, band 3 = green
+# DWI and NDWI for 2023
 dwi_23 = nir_23[[3]] - nir_23[[1]]
 ndwi_23 = dwi_23/(nir_23[[3]] + nir_23[[1]])
 plot(ndwi_23, col=cl)
 
+# DVI = Difference Vegetation Index; it is used for identifying (un)healthy vegetation 
+# the red band (vegetation absorbs light at this wavelength) is subtracted from the NIR band (vegetation reflects light at this λ)
+
+# DVI and NDVI for 2001
+dvi_01 = nir_01[[1]] - nir_01[[2]]
+plot(dvi_01, col=cl)
+ndvi_01 = dvi_01/ (nir_01[[1]] + nir_01[[2]])
+plot(ndvi_01, col=cl) # range from -1 to 1
+
+# DVI and NDVI for 2023
 dvi_23 = nir_23[[1]] - nir_23[[2]]
 plot(dvi_23, col=cl)
 ndvi_23 = dvi_23/(nir_23[[1]] + nir_23[[2]])
 plot(ndvi_23, col=cl)
 
-#ndvi (vegetation)
-dvi_23 = stacksent_23[[4]] - stacksent_23[[3]]
-dvi_23_cropped <- crop(dvi_23, ext_2)
-plot(dvi_23, col=cl)
-plot(dvi_23_cropped, col=cl)
-ndvi_23 = dvi_23/(stacksent_23[[4]] + stacksent_23[[3]])
-ndvi_23_cropped <- crop(ndvi_23, ext_2)
-plot(ndvi_23, col=cl)
-plot(ndvi_23_cropped, col=cl) # from -0.4391746 to 0.7079000
-
+# matrix of plots that show a comparison between 2001 NDWI and 2023 NDWI
 par(mfrow=c(2,2))
 im.plotRGB(nir_01, 1, 2, 3)
 im.plotRGB(nir_23, 1, 2, 3)
 plot(ndwi_01, col=cl)
 plot(ndwi_23, col=cl)
 
+# matrix of plots that show a comparison between 2001 NDVI and 2023 NDVI
 par(mfrow=c(2,2))
 im.plotRGB(nir_01, 1, 2, 3)
 im.plotRGB(nir_23, 1, 2, 3)
@@ -177,8 +153,6 @@ b5_23_croppedc <- im.classify(b5_01_cropped, num_clusters=3)
 
 nir_01c <- im.classify(nir_01, num_clusters=4) # decent
 nir_23c <- im.classify(nir_23, num_clusters=4) # bad
-
-# esporta jpeg di immagini cropped con nir come prima banda e usale in analisi  ulteriori
 
 par(mfrow=c(1,2))
 ndwi_23_croppedc <- im.classify(ndwi_23_cropped, num_clusters=3)
