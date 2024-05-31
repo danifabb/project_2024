@@ -1,4 +1,4 @@
-# Author: Daniela Fabbri
+# Project by Daniela Fabbri
 
 # Doñana National Park is a Ramsar site in Andalucia, in southern Spain. It is an important wetland area, with marshes and sand dunes. 
 # The river Guadalquivir flows along the eastern border of the park.  
@@ -125,11 +125,13 @@ im.plotRGB(nir_23, 1, 2, 3)
 plot(ndvi_01, col=cl)
 plot(ndvi_23, col=cl)
 
-# time series analysis
-# fare dwi_01 - dwi_23? Diff (once I have solved the 1-1 problem)
+# TIME SERIES analysis
+dwi_diff = dwi_01 - dwi_23 
+dvi_diff = dvi_01 - dvi_23
 
-# time difference with NIR band
+# time series analysis with NIR band
 dif_nir <- stacksent_01_cropped[[4]] - stacksent_23_cropped[[4]] # red parts highlight loss of vegetation, however there's also other places where it actually grew (blue)
+dif_nir <- nir_01[[1]] - nir_23[[1]]
 plot(dif_nir, col=clg)
 
 par(mfrow=c(1,3))
