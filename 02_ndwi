@@ -141,17 +141,15 @@ nir_diff = stack_nir[[1]] - stack_nir[[2]]
 clg <- colorRampPalette(c("blue", "white", "red")) (100)
 plot(nir_diff, col=clg) # higher values in the northern part of the park, whereas in the eastern part the situation has remained roughly the same
 
-# classification is apparently ok with one band only (that actually makes sense)
+# CLASSIFICATION
 par(mfrow=c(1,2))
 b4_01_cropped <- crop(b4_01, ext_2)
 plot(b4_01_cropped, col=cl)
 b4_01_croppedc <- im.classify(b4_01_cropped, num_clusters=3)
+
 b5_23_cropped <- crop(b5_23, ext_2)
 plot(b5_23_cropped, col=cl)
 b5_23_croppedc <- im.classify(b5_01_cropped, num_clusters=3)
-
-nir_01c <- im.classify(nir_01, num_clusters=4) # decent
-nir_23c <- im.classify(nir_23, num_clusters=4) # bad
 
 par(mfrow=c(1,2))
 ndwi_23_croppedc <- im.classify(ndwi_23_cropped, num_clusters=3)
