@@ -224,31 +224,46 @@ plot(stackd_01, col=viridis(100)) # sd13 shows the difference between land and w
 
 # 2023
 sd3_23 <- focal(nir_23_1, matrix(1/9, 3, 3), fun=sd) 
-plot(sd3_23, col=viridis(100)) # microvariations are highlighted
+plot(sd3_23, col=viridis(100)) 
 sd7_23 <- focal(nir_23_1, matrix(1/49, 7, 7), fun=sd) 
-sd13_23 <- focal(nir_23_1, matrix(1/169, 13, 13), fun=sd) 
-stackd_23 <- c(sd3_23, sd7_23, sd13_23)
+sd13_23 <- focal(nir_23_1, matrix(1/169, 13, 13), fun=sd) # same as above
+stackd_23 <- c(sd3_23, sd7_23, sd13_23) 
 plot(stackd_23, col=viridis(100))
 
 # I am going to do a PCA  that will allow me to make a multivariate analysis
 # if the different bands have a high correlation, I can "summarize" the information tha each of them carries into one dimension only.
 
-pairs(nir_01) # green and red band are highly correlated; NIR is less correlated with the other 2 bands
+pairs(nir_01) # green and red band are highly correlated; NIR is less correlated with the other 2 bands 
 pairs(nir_23) # same as above
 
-pcimage_01 <- im.pca(stacksent_01_cropped)
-tot <- sum(6352.8635, 4079.7893, 1474.8685, 237.1123) # 52% PC1
-6352.8635*100/tot
-pcimage_23 <- im.pca(stacksent_23_cropped) 
-tot <- sum(4383.0670, 2597.6502, 507.7512, 244.5125) # 57% PC1
-4383.0670*100/tot
+# 2001 PCA 
+pcimage_01 <- im.pca(nir_01) 
+tot <- sum(134.069963, 51.434891, 9.165451)
+134.069963*100/tot # PCI explains 68.87% of the data
+51.434891*100/tot # PCI explains 30.5% of the data
 
-pcimage_01 <- im.pca(nir_01)
+sd3_pca <- focal(pcimage_01, matrix(1/9, 3, 3), fun=sd) 
+plot(sd3_pca, col=viridis(100))
+sd7_pca <- focal(pcimage_01, matrix(1/49, 7, 7), fun=sd) 
+sd13_pca <- focal(pcimage_01, matrix(1/169, 13, 13), fun=sd) 
+stackd_pca <- c(sd3_pca, sd7_pca, sd13_pca) 
+plot(stackd_pca, col=viridis(100))
 
+# 2023 PCA
 pcimage_23 <- im.pca(nir_23)
+tot <- sum(133.34973, 25.85323, 9.46287)
+133.34973*100/tot # PCI explains 79.06% of the data
 
-# controlla pca ai 3 livelli per tutti e due + riguarda come era la variabilità con una sola banda
+sd3_pca2 <- focal(pcimage_23, matrix(1/9, 3, 3), fun=sd) 
+plot(sd3_pca2, col=viridis(100)) 
+sd7_pca2 <- focal(pcimage_23, matrix(1/49, 7, 7), fun=sd) 
+sd13_pca2 <- focal(pcimage_23, matrix(1/169, 13, 13), fun=sd) 
+stackd_pca2 <- c(sd3_pca2, sd7_pca2, sd13_pca2)
+plot(stackd_pca2, col=viridis(100))
 
+# conclusions: the data does show a decrease in the amount of water present in the wetland area (30% in 2001 and 13% in 2023); 
+# when it comes to vegetation, the situation is more nuanced, with the northern part of the park having decreased vegetation
+# and the eatern part being more stable 
 
 
 
