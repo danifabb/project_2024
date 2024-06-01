@@ -263,7 +263,7 @@ plot(stackd_pca2, col=viridis(100))
 
 # conclusions: the data does show a decrease in the amount of water present in the wetland area (30% in 2001 and 13% in 2023); 
 # when it comes to vegetation, the situation is more nuanced, with the northern part of the park having decreased vegetation
-# and the eatern part being more stable 
+# and the eastern part being more stable 
 
 
 
