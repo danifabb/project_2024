@@ -247,3 +247,49 @@ p1 + p2
 p1 <- ggplot(tabout, aes(x=class, y=y01, color=class)) + geom_bar(stat="identity", fill="white") +  ylim(c(0, 100))
 p2 <- ggplot(tabout, aes(x=class, y=y23, color=class)) + geom_bar(stat="identity", fill="white") +  ylim(c(0, 100))
 p1 + p2
+
+### 3. STANDARD DEVIATION: index that is used to measure variability; here it is going to show pixel variability. 
+
+# firstly, I am going to calculate sd on just one band (NIR)
+nir_01_1 <- nir_01[[1]] # selecting nir band
+plot(nir_01_1, col=cl)
+
+nir_23_1 <- nir_23[[1]] 
+plot(nir_23_1, col=cl)
+
+# 3 different sd calculated using moving windows of different size:
+
+# 2001
+sd3_01 <- focal(nir_01_1, matrix(1/9, 3, 3), fun=sd) 
+plot(sd3_01, col=viridis(100)) # microvariations are highlighted
+sd7_01 <- focal(nir_01_1, matrix(1/49, 7, 7), fun=sd) 
+sd13_01 <- focal(nir_01_1, matrix(1/169, 13, 13), fun=sd) 
+stackd_01 <- c(sd3_01, sd7_01, sd13_01) 
+plot(stackd_01, col=viridis(100)) # sd13 shows the difference between land and water the best (macrovariations are highlighted)
+
+# 2023
+sd3_23 <- focal(nir_23_1, matrix(1/9, 3, 3), fun=sd) 
+plot(sd3_23, col=viridis(100)) # microvariations are highlighted
+sd7_23 <- focal(nir_23_1, matrix(1/49, 7, 7), fun=sd) 
+sd13_23 <- focal(nir_23_1, matrix(1/169, 13, 13), fun=sd) 
+stackd_23 <- c(sd3_23, sd7_23, sd13_23)
+plot(stackd_23, col=viridis(100))
+
+# I am going to do a PCA  that will allow me to make a multivariate analysis
+# if the different bands have a high correlation, I can "summarize" the information tha each of them carries into one dimension only.
+
+pairs(nir_01) # green and red band are highly correlated; NIR is less correlated with the other 2 bands
+pairs(nir_23) # same as above
+
+pcimage_01 <- im.pca(stacksent_01_cropped)
+tot <- sum(6352.8635, 4079.7893, 1474.8685, 237.1123) # 52% PC1
+6352.8635*100/tot
+pcimage_23 <- im.pca(stacksent_23_cropped) 
+tot <- sum(4383.0670, 2597.6502, 507.7512, 244.5125) # 57% PC1
+4383.0670*100/tot
+
+pcimage_01 <- im.pca(nir_01)
+
+pcimage_23 <- im.pca(nir_23)
+
+# controlla pca ai 3 livelli per tutti e due + riguarda come era la variabilità con una sola banda
