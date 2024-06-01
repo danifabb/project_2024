@@ -261,9 +261,9 @@ sd13_pca2 <- focal(pcimage_23, matrix(1/169, 13, 13), fun=sd)
 stackd_pca2 <- c(sd3_pca2, sd7_pca2, sd13_pca2)
 plot(stackd_pca2, col=viridis(100))
 
-# conclusions: the data does show a decrease in the amount of water present in the wetland area (30% in 2001 and 13% in 2023); 
-# when it comes to vegetation, the situation is more nuanced, with the northern part of the park having decreased vegetation
-# and the eastern part being more stable 
+# conclusions: the data show a decrease in the amount of water present in the wetland area (30% in 2001 and 13% in 2023); 
+# when it comes to vegetation, the situation is more nuanced, with the northern part of the park having experienced a decrease vegetation
+# and the eastern part being more stable
 
 
 
