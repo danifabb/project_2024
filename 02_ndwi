@@ -265,7 +265,10 @@ plot(stackd_pca2, col=viridis(100))
 # when it comes to vegetation, the situation is more nuanced, with the northern part of the park having experienced a decrease vegetation
 # and the eastern part being more stable
 
-
+### Sources:
+# https://www.spain.info/it/natura/parco-nazionale-donana/
+# Earth observatory
+# https://whc.unesco.org/
 
 
 
