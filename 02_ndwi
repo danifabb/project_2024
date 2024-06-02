@@ -49,15 +49,12 @@ dev.off()
 
 ### before using the images to do further analysis, it is necessary to CUT them, as they include a much bigger area than the park.
 # cropping the 2001 image
-#ext_2 <- c(700000, 760000, 4070000, 4130000) 
 ext_3 <- c(720000, 760000, 4070000, 4130000) # the image can be cut by using the numbers (?) on the edges
-#stacksent_01_cropped_2 <- crop(stacksent_01, ext_2)
 stacksent_01_cropped <- crop(stacksent_01, ext_3) 
 im.plotRGB(stacksent_01_cropped, r=3, g=2, b=1) # now I have selected roughly the area of the park
 im.plotRGB(stacksent_01_cropped, 4, 3, 2) 
 
 # cropping of 2023 image as well
-#stacksent_23_cropped_2 <- crop(stacksent_23, ext_2)
 stacksent_23_cropped <- crop(stacksent_23, ext_3)
 im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, 4, 3, 2)
@@ -273,6 +270,11 @@ sd13_01 <- focal(nir_01_1, matrix(1/169, 13, 13), fun=sd)
 stackd_01 <- c(sd3_01, sd7_01, sd13_01) 
 plot(stackd_01, col=viridis(100)) # sd13 shows the difference between land and water the best (macrovariations are highlighted)
 
+#exporting files
+jpeg("2001_sd13.jpg")
+plot(sd13_01, col=viridis(100))
+dev.off()
+
 # 2023
 sd3_23 <- focal(nir_23_1, matrix(1/9, 3, 3), fun=sd) 
 plot(sd3_23, col=viridis(100)) 
@@ -280,6 +282,11 @@ sd7_23 <- focal(nir_23_1, matrix(1/49, 7, 7), fun=sd)
 sd13_23 <- focal(nir_23_1, matrix(1/169, 13, 13), fun=sd) # same as above
 stackd_23 <- c(sd3_23, sd7_23, sd13_23) 
 plot(stackd_23, col=viridis(100))
+
+#exporting files
+jpeg("2023_sd13.jpg")
+plot(sd13_23, col=viridis(100))
+dev.off()
 
 # I am going to do a PCA  that will allow me to make a multivariate analysis
 # if the different bands have a high correlation, I can "summarize" the information tha each of them carries into one dimension only.
