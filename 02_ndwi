@@ -321,5 +321,5 @@ plot(stackd_pca2, col=viridis(100))
 # Earth observatory
 # https://whc.unesco.org/
 # https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-3/ndwi/
-
+# https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel-3/ndvi/
 
