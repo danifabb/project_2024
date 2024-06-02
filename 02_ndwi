@@ -44,7 +44,7 @@ im.plotRGB(stacksent_23, r=3, g=2, b=1)
 
 # export image
 jpeg("image_2023_nat_col.jpg", width = 800, height = 800)
- 
+im.plotRGB(stacksent_23, r=3, g=2, b=1)
 dev.off()
 
 ### before using the images to do further analysis, it is necessary to CUT them, as they include a much bigger area than the park.
@@ -62,9 +62,9 @@ stacksent_23_cropped <- crop(stacksent_23, ext_3)
 im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, 4, 3, 2)
 
-jpeg("2023_natural_colors.jpg")
+# export file
+jpeg("zoom_2023.jpg")
 par(mfrow=c(1,2))
-im.plotRGB(stacksent_23, r=3, g=2, b=1)
 im.plotRGB(stacksent_23_cropped, r=3, g=2, b=1)
 dev.off()
 
